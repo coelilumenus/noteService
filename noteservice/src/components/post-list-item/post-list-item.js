@@ -9,10 +9,10 @@ const PostListItem = () => {
             </span>
             <div className="d-flex justify-content-center align-items-center">
                 <button type="button" className="btn-star btn-sm">
-                    <i class="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
                 </button>
                 <button type="button" className="btn-trash btn-sm">
-                    <i class="far fa-trash-alt"></i>
+                    <i className="far fa-trash-alt"></i>
                 </button>
                 <i className="fas fa-heart"></i>
             </div>
