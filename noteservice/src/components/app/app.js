@@ -13,19 +13,36 @@ export default class App extends Component {
         super(props);
         this.state = {
             data: [
-                { label: "Going to learn React", important: false, id: 'skfkas' },
-                { label: "it's really interesting c:", important: false, id: 'alsdlf' },
-                { label: "I need a brake...", important: true, id: 'asldflas' }
+                { label: "Going to learn React", important: false, id: 1 },
+                { label: "it's really interesting c:", important: false, id: 2 },
+                { label: "I need a brake...", important: true, id: 3 }
             ]
         }
-        this.onDelete = this.onDelete.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
+        this.addItem = this.addItem.bind(this);
+        
+        this.maxId = 4;
     }
 
-    onDelete(id) {
+    deleteItem(id) {
         this.setState(({ data }) => {
             const index = data.findIndex(elem => elem.id === id)
             const newArr = [...data.slice(0, index), ...data.slice(index + 1)]
-            
+
+            return {
+                data: newArr
+            }
+        })
+    }
+    
+    addItem(body) {
+        const newItem = {
+            label: body,
+            important: false,
+            id: this.maxId++
+        }
+        this.setState(({data}) => {
+            const newArr = [...data, newItem];
             return {
                 data: newArr
             }
@@ -40,20 +57,12 @@ export default class App extends Component {
                     <SearchPanel />
                     <PostStatusFilter />
                 </div>
-                <PostList onDelete={this.onDelete} posts={this.state.data} />
-                <PostAddForm />
+                <PostList
+                    onDelete={this.deleteItem}
+                    posts={this.state.data} />
+                <PostAddForm
+                    onAdd={this.addItem} />
             </div>
         )
     }
 }
-
-// Практика 3:
-// 1. Создать событие в postlistitem +
-// 2. Передать функцию через пропс в postlist +
-// 3. Передать функцию через пропс в app +
-// 4. Перевести app в класс и добавить ему state +
-// 5. Переместить data в state +
-// 6. Перенести вёрстку в метод render() {} +
-// 7. забиндить метод deleteItem +
-// 8. Не изменять state напрямую, создать промежуточную переменную и добавлять её в state
-// 9. с 19 минуты продолжение
